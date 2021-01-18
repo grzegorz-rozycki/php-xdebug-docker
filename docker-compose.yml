@@ -1,0 +1,16 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    image: app
+    environment: {}
+    # Sadly the `host.docker.internal` isn't supported on Linux.
+    # See this issue... https://github.com/docker/for-linux/issues/264
+    # If you want to override the xdebug.client_host address please use the docker-compose.override.yml file.
+    #XDEBUG_CONFIG: client_host={{YOUR_IP_ADDRESS}}
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/var/www/html
